@@ -234,7 +234,7 @@ create_statistics_meme(
     masked_stipple_img=masked_stipple,
     output_path="statistics_meme.png",
     dpi=150,
-    background_color="lightgray"  # or "pink", "lightgray", etc.
+    background_color="lightblue"  # or "pink", "lightgray", etc.
 )
 ```
 
