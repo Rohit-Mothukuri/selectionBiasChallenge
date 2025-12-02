@@ -56,7 +56,7 @@
         "\n",
         "Load an image, convert to grayscale, and resize to appropriate dimensions while maintaining aspect ratio."
       ],
-      "id": "a07e0c74"
+      "id": "e60807ad"
     },
     {
       "cell_type": "code",
@@ -95,7 +95,7 @@
         "\n",
         "Generate a blue noise stippling pattern from the prepared image. This creates a pattern of dots that preserves visual information while maintaining good spatial distribution."
       ],
-      "id": "8d4390f6"
+      "id": "49f73249"
     },
     {
       "cell_type": "code",
@@ -143,7 +143,7 @@
         "\n",
         "Create a tonal analysis by dividing the image into a grid and computing average brightness in each section. This visualizes the distribution of tones and helps identify which brightness ranges are most important."
       ],
-      "id": "40008f08"
+      "id": "1dd6b51b"
     },
     {
       "cell_type": "code",
@@ -212,7 +212,7 @@
         "## Step 4: Create Block Letter \"S\" \n",
         "block letter \"S\" is created using the create_block_letter_s function."
       ],
-      "id": "dcf45366"
+      "id": "926cfca2"
     },
     {
       "cell_type": "code",
@@ -228,7 +228,7 @@
         "h, w = gray_image.shape\n",
         "\n",
         "# Create block letter S\n",
-        "block_letter = create_block_letter_s(h, w, letter=\"S\", font_size_ratio=0.9)\n",
+        "block_letter = create_block_letter_s(h, w, letter=\"S\", font_size_ratio=1.2)\n",
         "\n",
         "# Display the block letter\n",
         "fig, ax = plt.subplots(figsize=(6.5, 5))\n",
@@ -249,7 +249,7 @@
         "## Step 5: Create Masked Image \n",
         "Block letter mask is applied on the stippled image."
       ],
-      "id": "d23d4eba"
+      "id": "0456db6d"
     },
     {
       "cell_type": "code",
@@ -286,7 +286,7 @@
       "source": [
         "## Create the Final Statistics Meme "
       ],
-      "id": "cb2d3ec1"
+      "id": "884e5541"
     },
     {
       "cell_type": "code",
@@ -320,7 +320,7 @@
         "\n",
         "Here's my completed statistics meme demonstrating selection bias:"
       ],
-      "id": "0c8f55ff"
+      "id": "4f7be0b1"
     },
     {
       "cell_type": "code",
@@ -346,7 +346,7 @@
         "\n",
         " - This meme demonstrates selection bias by showing how selectively keeping only certain stipple points distorts our understanding of the original image. The Reality panel reflects the true population, while the stippled image (Model) represents the full dataset we collect. When the selection bias removes all data except the points inside the “S,” the resulting Estimate becomes systematically distorted and no longer represents the true population — just like biased sampling in real studies leads to incorrect conclusions."
       ],
-      "id": "eca1f1a2"
+      "id": "bbac7f20"
     }
   ],
   "metadata": {
