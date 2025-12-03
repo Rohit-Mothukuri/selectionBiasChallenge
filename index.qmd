@@ -10,81 +10,38 @@ execute:
 
 # 🎨 Selection Bias & Missing Data Challenge
 
-## Step 1: Prepare Image
-
-Load an image, convert to grayscale, and resize to appropriate dimensions while maintaining aspect ratio.
-
 ```{python}
-#| label: step1-prepare
+#| label: create-meme
 #| echo: false
-#| fig-cap: "Original image prepared for processing"
+#| include: false
 
 import numpy as np
 import matplotlib.pyplot as plt
 from step1_prepare_image import prepare_image
+from step2_create_stipple import create_stipple
+from step3_create_tonal import create_tonal
+from step4_create_block_letter import create_block_letter_s
+from step5_create_masked import create_masked_stipple
+from create_meme import create_statistics_meme
 
 # Load and prepare the image
-# CHANGE THIS to use your own image!
-img_path = 'rohith.jpg'  # Example image - replace with your own image
+img_path = 'rohith.jpg'
 gray_image = prepare_image(img_path, max_size=512)
-
-# Display the prepared image
-fig, ax = plt.subplots(figsize=(6.5, 5))
-ax.imshow(gray_image, cmap='gray', vmin=0, vmax=1)
-ax.axis('off')
-ax.set_title('Step 1: Prepared Image', fontsize=14, fontweight='bold', pad=10)
-plt.tight_layout()
-plt.show()
-```
-
-## Step 2: Create Stippled Image
-
-Generate a blue noise stippling pattern from the prepared image. This creates a pattern of dots that preserves visual information while maintaining good spatial distribution.
-
-```{python}
-#| label: step2-stipple
-#| echo: false
-#| fig-cap: "Blue noise stippling pattern"
-#| message: false
-#| warning: false
-
-from step2_create_stipple import create_stipple
 
 # Create stippled image
 stipple_pattern, samples = create_stipple(
     gray_image,
-    percentage=0.08,  # 8% of pixels will be stippled
-    sigma=0.9,  # Repulsion radius
-    content_bias=0.9,  # Strongly follow importance map
-    noise_scale_factor=0.1,  # Moderate exploration
-    extreme_downweight=0.5,  # Moderate downweighting of extremes
-    extreme_threshold_low=0.2,  # Downweight tones below 0.2
-    extreme_threshold_high=0.8,  # Downweight tones above 0.8
-    extreme_sigma=0.1  # Smooth transition width
+    percentage=0.08,
+    sigma=0.9,
+    content_bias=0.9,
+    noise_scale_factor=0.1,
+    extreme_downweight=0.5,
+    extreme_threshold_low=0.2,
+    extreme_threshold_high=0.8,
+    extreme_sigma=0.1
 )
 
-# Display the stippled image
-fig, ax = plt.subplots(figsize=(6.5, 5))
-ax.imshow(stipple_pattern, cmap='gray', vmin=0, vmax=1)
-ax.axis('off')
-ax.set_title('Step 2: Stippled Image', fontsize=14, fontweight='bold', pad=10)
-plt.tight_layout()
-plt.show()
-```
-
-## Step 3: Create Tonal Analysis (Optional Refinement Step)
-
-Create a tonal analysis by dividing the image into a grid and computing average brightness in each section. This visualizes the distribution of tones and helps identify which brightness ranges are most important.
-
-```{python}
-#| label: step3-tonal
-#| echo: false
-#| fig-cap: "Box-averaged tonal analysis showing brightness distribution"
-
-from step3_create_tonal import create_tonal
-import matplotlib.pyplot as plt
-
-# Create tonal analysis with a 16×12 grid
+# Create tonal analysis
 grid_rows = 16
 grid_cols = 12
 tonal_image, average_tones, tonal_stats = create_tonal(
@@ -94,101 +51,16 @@ tonal_image, average_tones, tonal_stats = create_tonal(
     return_full_image=True
 )
 
-# Display the box-averaged tonal image with text annotations
-fig, ax = plt.subplots(figsize=(6.5, 5))
-
-# Show box-averaged tonal image
-ax.imshow(tonal_image, cmap='gray', vmin=0, vmax=1)
-ax.axis('off')
-ax.set_title('Step 3: Box-Averaged Tonal Analysis', fontsize=14, fontweight='bold', pad=10)
-
-# Calculate grid cell dimensions for text placement
-h, w = gray_image.shape
-section_h = h / grid_rows
-section_w = w / grid_cols
-
-# Add text annotations showing tone values (2 decimals) at the center of each grid cell
-for i in range(grid_rows):
-    for j in range(grid_cols):
-        tone = average_tones[i, j]
-        # Calculate center position of the grid cell
-        y_center = (i + 0.5) * section_h
-        x_center = (j + 0.5) * section_w
-        # Use white text for dark sections, black text for light sections
-        text_color = 'white' if tone < 0.5 else 'black'
-        ax.text(x_center, y_center, f'{tone:.2f}', 
-                ha='center', va='center', 
-                color=text_color, fontsize=6, fontweight='bold')
-
-plt.tight_layout()
-plt.show()
-
-# Print key statistics for parameter tuning
-print(f"\n📊 Tonal Statistics for Parameter Tuning:")
-print(f"  Mean brightness: {tonal_stats['mean']:.3f}")
-print(f"  Standard deviation: {tonal_stats['std']:.3f}")
-print(f"  Brightness range: [{tonal_stats['min']:.3f}, {tonal_stats['max']:.3f}]")
-
-```
-
-## Step 4: Create Block Letter "S" 
-block letter "S" is created using the create_block_letter_s function.
-
-```{python}
-#| label: step4-block-letter
-#| echo: false
-#| fig-cap: "Block letter S representing selection bias"
-
-from step4_create_block_letter import create_block_letter_s
-
-# Get image dimensions
-h, w = gray_image.shape
-
 # Create block letter S
-block_letter = create_block_letter_s(h, w, letter="S", font_size_ratio=1.2)
-
-# Display the block letter
-fig, ax = plt.subplots(figsize=(6.5, 5))
-ax.imshow(block_letter, cmap='gray', vmin=0, vmax=1)
-ax.axis('off')
-ax.set_title('Step 4: Selection Bias (Block Letter S)', fontsize=14, fontweight='bold', pad=10)
-plt.tight_layout()
-plt.show()
-```
-
-## Step 5: Create Masked Image 
-Block letter mask is applied on the stippled image.
-
-```{python}
-#| label: step5-masked
-#| echo: false
-#| fig-cap: "Masked stippled image showing selection bias effect"
-
-from step5_create_masked import create_masked_stipple
+h, w = gray_image.shape
+block_letter = create_block_letter_s(h, w, letter="S", font_size_ratio=1.0)
 
 # Create masked stippled image
 masked_stipple = create_masked_stipple(
     stipple_pattern,
     block_letter,
-    threshold=0.5  # Pixels below 0.5 are considered part of the mask
+    threshold=0.5
 )
-
-# Display the masked image
-fig, ax = plt.subplots(figsize=(6.5, 5))
-ax.imshow(masked_stipple, cmap='gray', vmin=0, vmax=1)
-ax.axis('off')
-ax.set_title('Step 5: Masked Stippled Image (Estimate)', fontsize=14, fontweight='bold', pad=10)
-plt.tight_layout()
-plt.show()
-```
-
-## Create the Final Statistics Meme 
-
-```{python}
-#| label: create-final-meme
-#| echo: false
-
-from create_meme import create_statistics_meme
 
 # Create the final meme
 create_statistics_meme(
@@ -198,24 +70,25 @@ create_statistics_meme(
     masked_stipple_img=masked_stipple,
     output_path="statistics_meme.png",
     dpi=150,
-    background_color="lightblue"  # or "pink", "lightgray", etc.
+    background_color="lightblue"
 )
 ```
 
 ## Final Statistics Meme
-
-Here's my completed statistics meme demonstrating selection bias:
 
 ```{python}
 #| label: final-meme
 #| echo: false
 #| fig-cap: "Statistics meme demonstrating selection bias"
 
-# Display the final meme
 from IPython.display import Image, display
 display(Image("statistics_meme.png"))
 ```
 
 ### Explanation
 
- - This meme demonstrates selection bias by showing how selectively keeping only certain stipple points distorts our understanding of the original image. The Reality panel reflects the true population, while the stippled image (Model) represents the full dataset we collect. When the selection bias removes all data except the points inside the “S,” the resulting Estimate becomes systematically distorted and no longer represents the true population — just like biased sampling in real studies leads to incorrect conclusions.
+- The meme demonstrates selection bias because only the stippled dots inside the block letter “S” are shown in the “Estimate” panel, making that region appear more meaningful or structured than it actually is.
+
+- This selective reveal hides the majority of the stipple pattern, which is visible in the full “Your Model” panel and shows a much more complex and noisy distribution.
+
+- By focusing on a non-representative subset of the data, the meme shows how selection bias can lead to misleading interpretations that do not reflect the true underlying image.

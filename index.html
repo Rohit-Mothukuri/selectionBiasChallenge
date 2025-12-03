@@ -67,115 +67,9 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="selection-bias-missing-data-challenge" class="level1">
 <h1>🎨 Selection Bias &amp; Missing Data Challenge</h1>
-<section id="step-1-prepare-image" class="level2">
-<h2 class="anchored" data-anchor-id="step-1-prepare-image">Step 1: Prepare Image</h2>
-<p>Load an image, convert to grayscale, and resize to appropriate dimensions while maintaining aspect ratio.</p>
-<div id="cell-step1-prepare" class="cell" data-execution_count="1">
-<div class="cell-output cell-output-stdout">
-<pre><code>Resized image from (1536, 1024) to (512, 341) for processing
-Final image shape: (512, 341) (should be 2D for grayscale)</code></pre>
-</div>
-<div class="cell-output cell-output-display">
-<div id="step1-prepare" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="index_files/figure-html/step1-prepare-output-2.png" width="301" height="470" class="figure-img"></p>
-<figcaption>Original image prepared for processing</figcaption>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="step-2-create-stippled-image" class="level2">
-<h2 class="anchored" data-anchor-id="step-2-create-stippled-image">Step 2: Create Stippled Image</h2>
-<p>Generate a blue noise stippling pattern from the prepared image. This creates a pattern of dots that preserves visual information while maintaining good spatial distribution.</p>
-<div id="cell-step2-stipple" class="cell" data-message="false" data-execution_count="2">
-<div class="cell-output cell-output-stdout">
-<pre><code>Importance map computed
-Generating blue noise stippling pattern...
-Generated 13967 stipple points
-Stipple pattern shape: (512, 341)
-Number of stippled points (0.0 values): 13967
-Number of background points (1.0 values): 160625</code></pre>
-</div>
-<div class="cell-output cell-output-display">
-<div id="step2-stipple" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="index_files/figure-html/step2-stipple-output-2.png" width="301" height="470" class="figure-img"></p>
-<figcaption>Blue noise stippling pattern</figcaption>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="step-3-create-tonal-analysis-optional-refinement-step" class="level2">
-<h2 class="anchored" data-anchor-id="step-3-create-tonal-analysis-optional-refinement-step">Step 3: Create Tonal Analysis (Optional Refinement Step)</h2>
-<p>Create a tonal analysis by dividing the image into a grid and computing average brightness in each section. This visualizes the distribution of tones and helps identify which brightness ranges are most important.</p>
-<div id="cell-step3-tonal" class="cell" data-execution_count="3">
-<div class="cell-output cell-output-stdout">
-<pre><code>Created tonal analysis: grid 16×12
-Tonal statistics: mean=0.639, std=0.220
-Tone range: [0.060, 0.946]</code></pre>
-</div>
-<div class="cell-output cell-output-display">
-<div id="step3-tonal" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="index_files/figure-html/step3-tonal-output-2.png" width="404" height="470" class="figure-img"></p>
-<figcaption>Box-averaged tonal analysis showing brightness distribution</figcaption>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-📊 Tonal Statistics for Parameter Tuning:
-  Mean brightness: 0.639
-  Standard deviation: 0.220
-  Brightness range: [0.060, 0.946]</code></pre>
-</div>
-</div>
-</section>
-<section id="step-4-create-block-letter-s" class="level2">
-<h2 class="anchored" data-anchor-id="step-4-create-block-letter-s">Step 4: Create Block Letter “S”</h2>
-<p>block letter “S” is created using the create_block_letter_s function.</p>
-<div id="cell-step4-block-letter" class="cell" data-execution_count="4">
-<div class="cell-output cell-output-display">
-<div id="step4-block-letter" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="index_files/figure-html/step4-block-letter-output-1.png" width="421" height="470" class="figure-img"></p>
-<figcaption>Block letter S representing selection bias</figcaption>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="step-5-create-masked-image" class="level2">
-<h2 class="anchored" data-anchor-id="step-5-create-masked-image">Step 5: Create Masked Image</h2>
-<p>Block letter mask is applied on the stippled image.</p>
-<div id="cell-step5-masked" class="cell" data-execution_count="5">
-<div class="cell-output cell-output-display">
-<div id="step5-masked" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="index_files/figure-html/step5-masked-output-1.png" width="464" height="470" class="figure-img"></p>
-<figcaption>Masked stippled image showing selection bias effect</figcaption>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="create-the-final-statistics-meme" class="level2">
-<h2 class="anchored" data-anchor-id="create-the-final-statistics-meme">Create the Final Statistics Meme</h2>
-<div id="create-final-meme" class="cell" data-execution_count="6">
-<div class="cell-output cell-output-stdout">
-<pre><code>Statistics meme saved to: statistics_meme.png
-  Image dimensions: 341 × 512 pixels per panel
-  Total meme size: 1364 × 512 pixels
-  Resolution: 150 DPI</code></pre>
-</div>
-</div>
-</section>
 <section id="final-statistics-meme" class="level2">
 <h2 class="anchored" data-anchor-id="final-statistics-meme">Final Statistics Meme</h2>
-<p>Here’s my completed statistics meme demonstrating selection bias:</p>
-<div id="cell-final-meme" class="cell" data-execution_count="7">
+<div id="cell-final-meme" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display">
 <div id="final-meme" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
@@ -188,7 +82,9 @@ Tone range: [0.060, 0.946]</code></pre>
 <section id="explanation" class="level3">
 <h3 class="anchored" data-anchor-id="explanation">Explanation</h3>
 <ul>
-<li>This meme demonstrates selection bias by showing how selectively keeping only certain stipple points distorts our understanding of the original image. The Reality panel reflects the true population, while the stippled image (Model) represents the full dataset we collect. When the selection bias removes all data except the points inside the “S,” the resulting Estimate becomes systematically distorted and no longer represents the true population — just like biased sampling in real studies leads to incorrect conclusions.</li>
+<li><p>The meme demonstrates selection bias because only the stippled dots inside the block letter “S” are shown in the “Estimate” panel, making that region appear more meaningful or structured than it actually is.</p></li>
+<li><p>This selective reveal hides the majority of the stipple pattern, which is visible in the full “Your Model” panel and shows a much more complex and noisy distribution.</p></li>
+<li><p>By focusing on a non-representative subset of the data, the meme shows how selection bias can lead to misleading interpretations that do not reflect the true underlying image.</p></li>
 </ul>
 </section>
 </section>
