@@ -73,24 +73,30 @@ def create_statistics_meme(
     masked_stipple_img = ensure_size(masked_stipple_img, h, w, "masked_stipple_img")
     
     # Create figure with four panels side by side
-    fig = plt.figure(figsize=(20, 7), facecolor=background_color)
+    # Add extra height to accommodate labels above the top border
+    fig = plt.figure(figsize=(20, 7.5), facecolor=background_color)
     
     gs = GridSpec(1, 4, figure=fig, wspace=0.0, hspace=0.0,
-                  left=0.0, right=1.0, top=0.97, bottom=0.03)
+                  left=0.0, right=1.0, top=0.90, bottom=0.03)
     
-    labels = ["Reality", "Your Model", "Selection Bias", "Estimate (Not Legit)"]
+    labels = ["Reality", "Your Model", "Selection Bias", "Estimate"]
     panel_data = [original_img, stipple_img, block_letter_img, masked_stipple_img]
     
-    # Create each panel
+    # Create each panel and add labels above
     for i, (label, img_data) in enumerate(zip(labels, panel_data)):
         ax = fig.add_subplot(gs[0, i])
         ax.imshow(img_data, cmap='gray', vmin=0, vmax=1, aspect='auto')
         ax.axis('off')
-        ax.set_title(label, fontsize=24, fontweight='bold', pad=2)
+        
+        # Add label text above the panel, positioned above the top border
+        panel_center = 0.125 + i * 0.25  # Center of each panel
+        fig.text(panel_center, 0.95, label, 
+                fontsize=22, fontweight='bold', ha='center', va='top',
+                color='black', zorder=20)
     
     # Add vertical separator lines between panels
     for x_pos in [0.25, 0.5, 0.75]:
-        line = Line2D([x_pos, x_pos], [0.03, 0.97],
+        line = Line2D([x_pos, x_pos], [0.03, 0.90],
                      transform=fig.transFigure,
                      color='lightblue',
                      linewidth=10,
@@ -99,11 +105,11 @@ def create_statistics_meme(
         fig.add_artist(line)
     
     # Add blue border around the entire meme (top, bottom, left, right)
-    # Top border
-    top_line = Line2D([0.0, 1.0], [0.97, 0.97],
+    # Top border - increased thickness, positioned below labels
+    top_line = Line2D([0.0, 1.0], [0.92, 0.92],
                      transform=fig.transFigure,
                      color='lightblue',
-                     linewidth=10,
+                     linewidth=25,
                      clip_on=False,
                      zorder=10)
     fig.add_artist(top_line)
@@ -118,7 +124,7 @@ def create_statistics_meme(
     fig.add_artist(bottom_line)
     
     # Left border
-    left_line = Line2D([0.0, 0.0], [0.03, 0.97],
+    left_line = Line2D([0.0, 0.0], [0.03, 0.90],
                       transform=fig.transFigure,
                       color='lightblue',
                       linewidth=10,
@@ -127,7 +133,7 @@ def create_statistics_meme(
     fig.add_artist(left_line)
     
     # Right border
-    right_line = Line2D([1.0, 1.0], [0.03, 0.97],
+    right_line = Line2D([1.0, 1.0], [0.03, 0.90],
                        transform=fig.transFigure,
                        color='lightblue',
                        linewidth=10,
@@ -135,7 +141,7 @@ def create_statistics_meme(
                        zorder=10)
     fig.add_artist(right_line)
     
-    plt.subplots_adjust(left=0.0, right=1.0, top=0.97, bottom=0.03, wspace=0.0, hspace=0.0)
+    plt.subplots_adjust(left=0.0, right=1.0, top=0.90, bottom=0.03, wspace=0.0, hspace=0.0)
     plt.savefig(output_path, dpi=dpi, facecolor=background_color, 
                 bbox_inches='tight', pad_inches=0.0)
     plt.close()
