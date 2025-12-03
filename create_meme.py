@@ -73,7 +73,7 @@ def create_statistics_meme(
     masked_stipple_img = ensure_size(masked_stipple_img, h, w, "masked_stipple_img")
     
     # Create figure with four panels side by side
-    fig = plt.figure(figsize=(20, 5), facecolor=background_color)
+    fig = plt.figure(figsize=(20, 7), facecolor=background_color)
     
     gs = GridSpec(1, 4, figure=fig, wspace=0.0, hspace=0.0,
                   left=0.0, right=1.0, top=0.97, bottom=0.03)
