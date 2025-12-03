@@ -53,7 +53,7 @@ tonal_image, average_tones, tonal_stats = create_tonal(
 
 # Create block letter S
 h, w = gray_image.shape
-block_letter = create_block_letter_s(h, w, letter="S", font_size_ratio=1.0)
+block_letter = create_block_letter_s(h, w, letter="S", font_size_ratio=0.95)
 
 # Create masked stippled image
 masked_stipple = create_masked_stipple(

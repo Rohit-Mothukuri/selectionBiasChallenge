@@ -93,10 +93,47 @@ def create_statistics_meme(
         line = Line2D([x_pos, x_pos], [0.03, 0.97],
                      transform=fig.transFigure,
                      color='lightblue',
-                     linewidth=6,
+                     linewidth=10,
                      clip_on=False,
                      zorder=10)
         fig.add_artist(line)
+    
+    # Add blue border around the entire meme (top, bottom, left, right)
+    # Top border
+    top_line = Line2D([0.0, 1.0], [0.97, 0.97],
+                     transform=fig.transFigure,
+                     color='lightblue',
+                     linewidth=10,
+                     clip_on=False,
+                     zorder=10)
+    fig.add_artist(top_line)
+    
+    # Bottom border
+    bottom_line = Line2D([0.0, 1.0], [0.03, 0.03],
+                        transform=fig.transFigure,
+                        color='lightblue',
+                        linewidth=10,
+                        clip_on=False,
+                        zorder=10)
+    fig.add_artist(bottom_line)
+    
+    # Left border
+    left_line = Line2D([0.0, 0.0], [0.03, 0.97],
+                      transform=fig.transFigure,
+                      color='lightblue',
+                      linewidth=10,
+                      clip_on=False,
+                      zorder=10)
+    fig.add_artist(left_line)
+    
+    # Right border
+    right_line = Line2D([1.0, 1.0], [0.03, 0.97],
+                       transform=fig.transFigure,
+                       color='lightblue',
+                       linewidth=10,
+                       clip_on=False,
+                       zorder=10)
+    fig.add_artist(right_line)
     
     plt.subplots_adjust(left=0.0, right=1.0, top=0.97, bottom=0.03, wspace=0.0, hspace=0.0)
     plt.savefig(output_path, dpi=dpi, facecolor=background_color, 
