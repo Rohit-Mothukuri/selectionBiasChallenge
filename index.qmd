@@ -145,7 +145,7 @@ from step4_create_block_letter import create_block_letter_s
 h, w = gray_image.shape
 
 # Create block letter S
-block_letter = create_block_letter_s(h, w, letter="S", font_size_ratio=1.2)
+block_letter = create_block_letter_s(h, w, letter="S", font_size_ratio=1.0)
 
 # Display the block letter
 fig, ax = plt.subplots(figsize=(6.5, 5))
