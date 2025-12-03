@@ -10,42 +10,6 @@ execute:
 
 # 🎨 Selection Bias & Missing Data Challenge
 
-::: {.callout-important}
-## 📊 Challenge Overview
-
-**Your Task:** Create a four-panel statistics meme demonstrating selection bias. You'll write three Python functions yourself to complete the workflow, then assemble them into a professional meme.
-
-**Deliverables:**
-
-1. Three Python functions you write yourself:
-   - `step4_create_block_letter.py` - Create a block letter "S" matching image dimensions
-   - `step5_create_masked.py` - Apply the letter mask to the stippled image
-   - `create_meme.py` - Assemble all components into the four-panel meme
-2. A complete `index.qmd` file that uses all functions to generate your meme
-3. Your final statistics meme (as a PNG file) using your own image
-
-**Key Learning:** This challenge teaches you to write modular Python functions and assemble them into a complete workflow. You'll learn to structure code professionally and create a memorable visual representation of selection bias.
-
-**Repository Information:**
-
-- **Source/Starter File:** Available in the main repository at [https://github.com/flyaflya/selectionBiasChallenge](https://github.com/flyaflya/selectionBiasChallenge)
-- **Challenge Read Online:** View the challenge instructions at [https://flyaflya.github.io/selectionBiasChallenge](https://flyaflya.github.io/selectionBiasChallenge)
-- **Your Submission:** Fork this challenge and create your GitHub Pages site at `https://[your-username].github.io/selectionBiasChallenge/`
-:::
-
-## The Problem: Visualizing Selection Bias
-
-Selection bias occurs when observed data isn't representative of the population. Your meme will demonstrate this concept through visual metaphor:
-
-- **Reality**: Your original image represents the true population
-- **Your Model**: Your stippled image represents your data collection (sampling)
-- **Selection Bias**: A bold letter "S" represents a systematic pattern of missing data
-- **Estimate**: Stippled image with "S" mask applied shows the biased estimate—what you see when selection bias removes data points in a systematic pattern
-
-**Key Concept:** Images are simply matrices—2D arrays where each value represents a pixel (0.0 = black, 1.0 = white). Your stippled image is a matrix with black dots (data points) on a white background. Selection bias removes some of these pixels (data points) in a systematic pattern (the "S"), creating a biased estimate.
-
-**Key Insight:** When data is missing in a systematic pattern (not random), your estimates become biased. The "S" shape makes it visually obvious that the missing data follows a pattern, just like real selection bias in statistics.
-
 ## Step 1: Prepare Image
 
 Load an image, convert to grayscale, and resize to appropriate dimensions while maintaining aspect ratio.
