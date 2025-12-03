@@ -39,8 +39,8 @@ def create_block_letter_s(
     img = Image.new('L', (width, height), color=255)
     draw = ImageDraw.Draw(img)
     
-    # Calculate font size based on the smaller dimension
-    font_size = int(min(height, width) * font_size_ratio)
+    # Calculate font size based on the image height for better scaling
+    font_size = int(height * font_size_ratio)
     
     # Try to find a suitable bold font
     font = None
