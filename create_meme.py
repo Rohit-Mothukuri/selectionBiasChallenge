@@ -86,14 +86,14 @@ def create_statistics_meme(
         ax = fig.add_subplot(gs[0, i])
         ax.imshow(img_data, cmap='gray', vmin=0, vmax=1, aspect='auto')
         ax.axis('off')
-        ax.set_title(label, fontsize=16, fontweight='bold', pad=2)
+        ax.set_title(label, fontsize=24, fontweight='bold', pad=2)
     
     # Add vertical separator lines between panels
     for x_pos in [0.25, 0.5, 0.75]:
         line = Line2D([x_pos, x_pos], [0.03, 0.97],
                      transform=fig.transFigure,
                      color='lightblue',
-                     linewidth=3,
+                     linewidth=6,
                      clip_on=False,
                      zorder=10)
         fig.add_artist(line)
