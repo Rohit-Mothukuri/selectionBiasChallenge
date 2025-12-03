@@ -78,7 +78,7 @@ def create_statistics_meme(
     gs = GridSpec(1, 4, figure=fig, wspace=0.0, hspace=0.0,
                   left=0.0, right=1.0, top=0.97, bottom=0.03)
     
-    labels = ["Reality", "Your Model", "Selection Bias", "Estimate"]
+    labels = ["Reality", "Your Model", "Selection Bias", "Estimate (Not Legit)"]
     panel_data = [original_img, stipple_img, block_letter_img, masked_stipple_img]
     
     # Create each panel
